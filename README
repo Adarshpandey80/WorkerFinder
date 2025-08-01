@@ -10,9 +10,9 @@ Worker Finder is a simple web platform that connects users with local skilled wo
 📝 Simple registration & profile management for workers.
 
 🏗️ Technologies Used
-Backend: (e.g., Node.js / Django / Laravel)
+Backend: (e.g., Node.js / MongoDB / Express )
 
-Frontend: (e.g., React / HTML-CSS / Vue.js)
+Frontend: (e.g., JavaScript / HTML-CSS  )
 
-Database: (e.g., MongoDB / MySQL / Firebase)
+Database: (e.g., MongoDB / MySQL )
 
