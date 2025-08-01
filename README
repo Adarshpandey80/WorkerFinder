@@ -1,0 +1,18 @@
+Worker Finder is a simple web platform that connects users with local skilled workers like plumbers, carpenters, and electricians. Any registered user can act as both a service seeker and service provider (worker).
+
+🚀 Features
+🔧 Users can register as workers by selecting a skill (Plumber, Carpenter, Electrician).
+
+👤 Single account supports both hiring and working roles.
+
+📍 Find nearby workers based on selected service category.
+
+📝 Simple registration & profile management for workers.
+
+🏗️ Technologies Used
+Backend: (e.g., Node.js / Django / Laravel)
+
+Frontend: (e.g., React / HTML-CSS / Vue.js)
+
+Database: (e.g., MongoDB / MySQL / Firebase)
+
