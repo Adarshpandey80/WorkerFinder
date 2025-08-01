@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workerfinder</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    
+   <header >
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <a class="navbar-logo" href="#">Worker <span>-Finder</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav" >
+              <li class="nav-item">
+                <a class="nav-link "  href="home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+            
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               services
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="plumber">Plumber</a></li>
+                  <li><a class="dropdown-item" href="electrician">Electrician</a></li>
+                  <li><a class="dropdown-item" href="carpenter">Carpenter</a></li>
+                </ul>
+              </li>
+              <li class="dropdown register">
+                <button class="btn btn-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Register
+                </button>
+                <ul class="dropdown-menu">
+                
+                  <li><a class="dropdown-item" href="formcarpenter">carpenter</a></li>
+                  <li><a class="dropdown-item" href="formelectrician">electrician</a></li>
+                  <li><a class="dropdown-item" href="formplumber">plumber</a></li>
+             
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown me-3 ">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <i class="fa-solid fa-user"></i>
+                </a>
+                <ul class="dropdown-menu " >
+                 <% if (!currUser) { %>
+                  <li><a class="dropdown-item" href="signup">Signup</a></li>
+                  <li><a class="dropdown-item" href="login">Login</a></li>
+                  <% } %>    <% if (currUser) { %>
+                  <li><a class="dropdown-item" href="logout">Logout</a></li>
+                   <% } %>
+                </ul>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+   </header>
+         <%if(success && success.length) {%>
+   <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert">
+    <%=success%>
+     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+   </div>
+   <% }%>
+     
+    
+
+    <!-- <marquee behavior="" direction=""><h1> Welcome To Worker-Finder </h1></marquee> -->
+   <section class="hero">
+      <div class="about">
+          <h1>Thank you for choosing Worker-Finder!</h1>
+         <p>We are a platform that connects skilled workers with those in need of their services. Whether you're looking for a plumber, electrician, or carpenter, we've got you covered.</p>
+         <p>Our mission is to make it easy for you to find reliable and skilled workers in your area. We vet all our workers to ensure they meet our high standards of quality and professionalism.</p>
+      </div>
+  </section>
+
+  <section class="services">
+    <h2> Our services</h2>
+    <p>We offer a wide range of services to meet your needs. Our skilled workers are available for both residential and commercial projects.</p>
+    <p>Whether you need a quick repair or a major renovation, we have the right worker for the job.</p>
+    <h5>Our services include:</h5>
+    <div class="cards">
+       <div class="card">
+      <img src="https://t3.ftcdn.net/jpg/03/18/50/34/360_F_318503457_FLLfdUmw3Mo5KVcaaRc4ovFSjkXW20d7.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5>Carpenter</h5>
+        <p class="card-text">Our skilled carpenters provide top-notch woodworking solutions for residential and commercial projects</p>
+      </div>
+    </div>
+    <div class="card" >
+      <img src="https://img.freepik.com/free-photo/male-electrician-works-switchboard-with-electrical-connecting-cable_169016-15090.jpg?semt=ais_hybrid&w=740" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5>Electrician</h5>
+        <p class="card-text">Our certified electricians provide safe, efficient, and code-compliant electrical solutions for homes . </p>
+      </div>
+    </div>
+    <div class="card" >
+      <img src="https://images.pexels.com/photos/585418/pexels-photo-585418.jpeg?cs=srgb&dl=pexels-yury-kim-181374-585418.jpg&fm=jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5>Construction</h5>
+        <p class="card-text">We deliver high-quality construction services for residential, commercial, and industrial projects.</p> 
+      </div>
+    </div>
+    <div class="card" >
+      <img src="https://thumbs.dreamstime.com/b/hands-plumber-work-bathroom-plumbing-repair-service-as-hands-plumber-work-bathroom-plumbing-repair-service-109779168.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5>Plumber</h5>
+        <p class="card-text">Our licensed plumbers provide top-quality plumbing repairs, installations and maintenance.  </p>
+      </div>
+    </div>
+    <div class="card" >
+      <img src="https://t4.ftcdn.net/jpg/03/38/19/37/360_F_338193799_gALMNum05jXcYilTMH0hmTuUyeHbYfk5.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5>Penter</h5>
+        <p class="card-text">Our skilled painters deliver flawless interior and exterior finishes for homes, offices, and commercial properties.</p>
+      </div>
+    </div>
+    <div class="card" >
+      <img src="https://media.istockphoto.com/id/1018159014/photo/smiling-workman-posing-with-crossed-arms-in-auto-mechanic-shop.jpg?s=612x612&w=0&k=20&c=vWaZlikWM7evlS2RFJv-jNlM__EpH_kiU0AC5BmMYis=" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5>Mechanic</h5>
+        <p class="card-text">Our certified mechanics provide reliable, honest, and affordable car repair services for all makes and models.</p>
+      </div>
+    </div>
+    </div>
+   
+  </section>
+
+
+
+
+
+
+
+
+   
+   
+  
+
+    <!-- About Section -->
+<section id="about">
+
+
+    <section class="section"  >
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Story</h2>
+                <p>How SkillConnect Pro became the leading platform for local service connections</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>From Vision to Reality</h3>
+                    <p>Founded in 2025 by Adarsh Pandey, SkillConnect Pro emerged from a simple yet powerful idea: to create a platform that makes finding reliable local service professionals as easy as ordering food delivery. Adarsh recognized the challenges homeowners face when searching for trustworthy carpenters, electricians, and plumbers, while also understanding the struggles skilled workers encounter in finding consistent work.</p>
+                    <p>What began as a small startup has grown into a comprehensive platform serving thousands of customers and professionals across multiple cities. Our rigorous vetting process, innovative matching algorithm, and commitment to customer satisfaction have set us apart in the industry.</p>
+                    <p>Today, SkillConnect Pro continues to innovate, with plans to expand to new service categories and implement AI-powered recommendations to further improve the user experience.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Team working together">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose SkillConnect Pro</h2>
+                <p>Discover the features that make our platform the preferred choice for both customers and professionals</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Verified Professionals</h3>
+                    <p>Every professional undergoes comprehensive background checks, license verification, and skills assessment before joining our platform.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instant Matching</h3>
+                    <p>Our smart algorithm connects you with available professionals in your area within minutes, saving you hours of searching.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Transparent Pricing</h3>
+                    <p>See upfront pricing with no hidden fees. Compare quotes from multiple professionals to find the best value.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Rating System</h3>
+                    <p>Read genuine reviews from previous customers and rate your experience to help maintain our quality standards.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Secure Payments</h3>
+                    <p>All transactions are processed securely through our platform, with funds held in escrow until work is completed to your satisfaction.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Our dedicated support team is available around the clock to assist with any questions or issues that may arise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Mission & Values</h2>
+                <p>The principles that guide everything we do at SkillConnect Pro</p>
+            </div>
+            <div class="mission-cards">
+                <div class="mission-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Build Trust</h3>
+                    <p>We're committed to creating a platform where customers can find professionals they trust, and professionals can find reliable work opportunities.</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Drive Innovation</h3>
+                    <p>We continuously improve our platform with cutting-edge technology to make the service experience seamless for everyone.</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Empower Communities</h3>
+                    <p>We believe in strengthening local economies by helping skilled tradespeople grow their businesses and serve their communities.</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-balance-scale"></i>
+                    <h3>Ensure Fairness</h3>
+                    <p>We maintain transparent practices that benefit both customers and professionals, creating a balanced ecosystem for all.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy Section -->
+    <section class="section" style="background-color: #f1f5f9;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Strategic Approach</h2>
+                <p>How we're building the future of local service connections</p>
+            </div>
+            <div class="strategy-steps">
+                <div class="strategy-step">
+                    <div class="strategy-content">
+                        <h3>Rigorous Vetting Process</h3>
+                        <p>We've developed a comprehensive 5-step verification process that includes identity verification, license checks, skills assessment, background screening, and customer feedback analysis. This ensures only the most qualified professionals join our platform.</p>
+                    </div>
+                </div>
+                <div class="strategy-step">
+                    <div class="strategy-content">
+                        <h3>Smart Matching Technology</h3>
+                        <p>Our proprietary algorithm considers over 20 factors including location, availability, skillset, pricing, and customer ratings to make the perfect match for each job requirement.</p>
+                    </div>
+                </div>
+                <div class="strategy-step">
+                    <div class="strategy-content">
+                        <h3>Continuous Quality Improvement</h3>
+                        <p>We collect feedback after every completed job and use this data to improve our matching system, identify training opportunities for professionals, and enhance the overall user experience.</p>
+                    </div>
+                </div>
+                <div class="strategy-step">
+                    <div class="strategy-content">
+                        <h3>Community Building Initiatives</h3>
+                        <p>We host regular workshops and networking events for our professionals, provide business development resources, and create opportunities for skill enhancement to help them grow their businesses.</p>
+                    </div>
+                </div>
+                <div class="strategy-step">
+                    <div class="strategy-content">
+                        <h3>Technology Roadmap</h3>
+                        <p>Our future plans include AI-powered job estimates, augmented reality for remote assessments, blockchain-based credential verification, and IoT integration for predictive maintenance alerts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="founder-section">
+        <div class="container">
+            <div class="founder-card">
+                <img src="/css/me.jpg" alt="Adarsh Pandey" class="founder-image">
+                <h3>Adarsh Pandey</h3>
+                <p class="founder-title">Founder & CEO</p>
+                <p>"I started Worker-Finder  because I saw firsthand how difficult it was for my family to find reliable tradespeople for our home. At the same time, I met incredibly skilled professionals who struggled to find consistent work. Our platform solves both problems by creating a trusted marketplace that benefits everyone."</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+        
+  <footer>
+    <div class="footer-content">
+    <p>&copy; 2025 Worker-Finder. All Rights Reserved. Founded by Adarsh Pandey.</p>
+        <ul class="social-media">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </div>
+</footer>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</body>
+</html>

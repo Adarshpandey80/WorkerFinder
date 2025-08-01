@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workerfinder</title>
+    <link rel="stylesheet" href="/css/edit.css">
+</head>
+<body>
+          <%if(success && success.length) {%>
+   <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert">
+    <%=success%>
+     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+   </div>
+   <% }%>
+
+    <form  method="POST"action="/carpenter/<%= listing._id %>?_method=PUT"> 
+        <h1>Edit your existing data</h1>
+        <img src="<%= listing.image.url %>" alt="">
+        <input type="file" name="image" accept="image/*" >
+        <br><br>
+       <input type="text"  name="name"  value="<%= listing.name %>" >
+       <br><br>
+        <input type="number" name="contact"  value="<%= listing.contact %>" >
+         <br><br>
+         <input type="number" name="rate"  value="<%= listing.rate %>" >
+         <br><br>
+         <input type="text" name="location"  value="<%= listing.location %>" >
+         <br><br>
+         <input type="text" name="country"  value="<%= listing.country %>" >
+         <br><br>
+        <textarea name="experience"><%= listing.experience %></textarea> 
+            <br><br>
+        
+        <input type="submit" value="submit">
+
+    </form>
+</body>
+</html>
