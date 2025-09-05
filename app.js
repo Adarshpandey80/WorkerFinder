@@ -92,7 +92,14 @@ app.get("/login" , (req,res)=>{
 app.post("/signup", async (req, res, next) => {
   try {
     const { username, password, email } = req.body;
-  
+    
+  // Check if username already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      req.flash("error", "A user with the given username is already registered.");
+      return res.redirect("/signup");
+    }
+
     // Extra safety: validate email (backend)
     if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
       req.flash("error", "Email must be a Gmail address.");
@@ -119,7 +126,11 @@ app.post("/signup", async (req, res, next) => {
 
   } catch (e) {
     console.error(e.message);
-    req.flash('error', e.message);
+    if (e.code === 11000 && e.message.includes('email')) {
+      req.flash('error', 'Email already registered');
+    } else {
+      req.flash('error', e.message);
+    }
     res.redirect('/signup');
   }
 });
