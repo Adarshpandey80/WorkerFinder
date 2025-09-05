@@ -9,28 +9,36 @@ const plumberSchema = new Schema({
        name:
        {
            type: String,
+         required: true,
+      
           
        } ,
     
         contact : {
-            type: String,
+             type: Number,
+            required: true,
+            unique: true,
            
         } ,
           location : {
             type: String,
+                required: true,
            
             },
         rate:
         {
-            type: String,
+            type: Number,
+            required: true,
         },
         
         country :{
             type: String,
+            required: true,
         
         } ,
         experience : {
             type: String,
+            required: true,
         },
         reviews :[
         {

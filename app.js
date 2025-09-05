@@ -42,7 +42,7 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate())); 
+passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser()); // serializeUser is a method in passport.js to store user data in session
 passport.deserializeUser(User.deserializeUser()); // deserializeUser is a method in passport.js to delete user data from session
@@ -89,26 +89,42 @@ app.get("/login" , (req,res)=>{
   })
 
 
-app.post("/signup" ,  async(req,res)=>{
+app.post("/signup", async (req, res, next) => {
   try {
-  const {username , password , email} = req.body;
-  const newUser = new User({username , email });
-  const registeredUser = await User.register(newUser , password);
-  req.login(registeredUser , (err)=>{
-    if(err) {
-      return next(err);
-      }
-      req.flash('success' , 'Welcome to worker finder');
+    const { username, password, email } = req.body;
+  
+    // Extra safety: validate email (backend)
+    if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
+      req.flash("error", "Email must be a Gmail address.");
+      return res.redirect('/signup');
+    }
+
+    // Extra safety: validate password (backend)
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/;
+    if (!passwordRegex.test(password)) {
+      req.flash("error", "Password must be 6-12 chars with A-Z, a-z, 0-9 & symbol.");
+      return res.redirect('/signup');
+    }
+
+    // Register user
+    const newUser = new User({ username, email });
+    const registeredUser = await User.register(newUser, password);
+
+    // Auto-login after signup
+    req.login(registeredUser, (err) => {
+      if (err) return next(err);
+      req.flash('success', 'Welcome to Worker Finder!');
       res.redirect("/home");
-      });
+    });
 
-    }
-  catch (err) {
-    req.flash('error' , err.message);
+  } catch (e) {
+    console.error(e.message);
+    req.flash('error', e.message);
     res.redirect('/signup');
-    }
+  }
+});
 
-})
+
 
 
 app.post("/login"  ,

@@ -10,29 +10,42 @@ const electricianSchema = new Schema({
    },
    name:
    {
-       type: String,
+        type: String,
+         required: true,
+      
       
    } ,
 
     contact : {
-        type: String,
+         type: Number,
+         required: true,
+         unique: true,
        
     } ,
       location : {
         type: String,
+         required: true,
+      
        
         },
     rate:
     {
-        type: String,
+         type: Number,
+         required: true,
+      
     },
     
     country :{
         type: String,
+         required: true,
+
+      
     
     } ,
     experience : {
-        type: String,
+         type: String,
+         required: true,
+      
     },
     reviews :[
         {
