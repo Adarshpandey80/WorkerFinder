@@ -59,11 +59,12 @@ app.use((req,res,next)=>{
 })
 
 
-
+// const MONGO_URL = "mongodb://127.0.0.1:27017/workerfinder";
+const dburl = process.env.ATLUS_URL;
 
 async function main() {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/workerfinder');
+    await mongoose.connect(dburl);
     console.log('Connected to MongoDB');
   } catch (err) {
     console.error('MongoDB connection error:', err);
