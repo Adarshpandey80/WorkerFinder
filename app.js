@@ -543,7 +543,9 @@ app.delete("/plumber/:id/reviews/:reviewId", isLoggedIn,  isreviewAuthod,
 //       })
 
 
-
+app.get("/", (req, res) => {
+  res.render("listings/home");
+});
 
 app.get("/home", (req, res) => {
   res.render("listings/home");
