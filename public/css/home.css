@@ -120,34 +120,33 @@ header {
 /* Hero section styles */
 
 .hero {
-  background-image: url('https://images.pexels.com/photos/585418/pexels-photo-585418.jpeg?cs=srgb&dl=pexels-yury-kim-181374-585418.jpg&fm=jpg');
+  /* background-image: url('https://images.pexels.com/photos/585418/pexels-photo-585418.jpeg?cs=srgb&dl=pexels-yury-kim-181374-585418.jpg&fm=jpg'); */
+  background-color: whitesmoke;
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 80vh;
   /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: black;
   padding: 0 15px; /* Added padding to prevent overflow */
   box-sizing: border-box;
 }
 .hero h1 {
-  font-size: 50px;
+  font-size: 45px;
   text-align: center;
   margin-bottom: 20px;
-  padding: 0 20px;
-  color: rgb(208, 0, 255);
-  word-wrap: break-word;
+  font-weight: bold;
+  color: #52605c; /* Changed color to match the logo */
+        
 }
 .hero p {
-  width: 100%;
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
-  margin-bottom: 30px;
-  padding: 0 15px;
-  box-sizing: border-box;
-  word-wrap: break-word;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #333;
 }
 .btn {
    margin-left: 0; /*Removed margin-left to prevent overflow */

@@ -504,44 +504,6 @@ app.delete("/plumber/:id/reviews/:reviewId", isLoggedIn,  isreviewAuthod,
 
 
 
-// app.get("/pulmber" , async (req , res) => {
-//   let sampellisting = new Pulmber({
-//     name: "John Doe",
-//     rate : 100,
-//     location : "New York",
-//     country : "USA",
-//     });
-//     await sampellisting.save();
-//     console.log("sample was saved");
-//     res.send("sample was saved");
-//   });
-
-//   app.get("/carpenter" , async (req , res) => {
-//     let carpenterlisting = new Carpenter({
-//       name: "John Doe",
-//       rate : 100,
-//       location : "New York",
-//       country : "USA",
-//       });
-//       await carpenterlisting.save();
-//       console.log("sample was saved");
-//       res.send("sample was saved");
-//       });
-       
-
-//       app.get("/electrician" , async (req , res) => {
-//         let electricianlisting = new Electrician({
-//           name: "John Doe",
-//           rate : 100,
-//           location : "New York",
-//           country : "USA",
-//           });
-//           await electricianlisting.save();
-//           console.log("sample was saved");
-//           res.send("electrician data save");
-          
-//       })
-
 
 app.get("/", (req, res) => {
   res.render("listings/home");
