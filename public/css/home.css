@@ -175,6 +175,33 @@ header {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
 }
 
+.about_btn {
+  display: block;
+  margin: 30px auto;
+  width: fit-content;
+  background-color: #17a2b8;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.about_btn:hover {
+  background-color: #128f7e;
+  color: #fff;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+.about_a {
+  color: #fff;
+  text-decoration: none;
+}
+.about_a:hover {
+  color: #fff;
+  
+}
+
 /* services   */
 
 .services {
