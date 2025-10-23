@@ -88,7 +88,13 @@ app.get ("/signup" , (req,res)=>{
 app.get("/login" , (req,res)=>{
   res.render("users/login");
   })
+app.get("/users/login", (req,res)=>{
+  res.render("users/login");
+});
 
+app.get("/users/signup", (req,res)=>{
+  res.render("users/signup");
+});
 
 app.post("/signup", async (req, res, next) => {
   try {
