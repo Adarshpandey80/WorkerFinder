@@ -205,14 +205,15 @@ header {
 /* services   */
 
 .services {
-  background-color: #3E3F5B;
+  background-color: rgb(214, 213, 216 , 0.4);
   padding: 50px 0;
 }
 
  .services h2 {
   text-align: center;
   font-size: 50px;
-  color: #fff;
+  font-weight: bold;
+  color: black ;
   font-family: 'Arial', sans-serif;
   margin-bottom: 30px;
   
@@ -220,14 +221,17 @@ header {
 .services p {
   text-align: center;
   font-size: 20px;
-  color: #fff;
+  color: #333;
   padding: 0 20px;
 
 }
 .services h5 {
+  margin-top: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: black ;
+  font-family: 'Arial', sans-serif;
   text-align: center;
-  font-size: 20px;
-  color: #fff;
 
 }
 
