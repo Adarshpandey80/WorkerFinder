@@ -43,7 +43,6 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
-
 passport.serializeUser(User.serializeUser()); // serializeUser is a method in passport.js to store user data in session
 passport.deserializeUser(User.deserializeUser()); // deserializeUser is a method in passport.js to delete user data from session
 
@@ -64,13 +63,16 @@ const dburl = process.env.ATLUS_URL;
 
 async function main() {
   try {
-    await mongoose.connect(dburl);
+    await mongoose.connect(dburl, {
+      serverSelectionTimeoutMS: 5000, 
+      bufferCommands: false, 
+    });
     console.log('Connected to MongoDB');
   } catch (err) {
     console.error('MongoDB connection error:', err);
+    process.exit(1); // Exit if connection fails
   }
 }
-main();
 
 app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname , "views"));
@@ -522,7 +524,13 @@ app.get("/home", (req, res) => {
 app.get("/about", (req, res) => {
   res.render("about");
 });
-app.listen(3000, ()=>{
+
+// Start server after DB connection
+main().then(() => {
+  app.listen(3000, () => {
     console.log('Server is running on port 3000');
-})
+  });
+}).catch(err => {
+  console.error('Failed to start server:', err);
+});
 
