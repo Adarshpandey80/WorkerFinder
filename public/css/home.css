@@ -120,25 +120,31 @@ header {
 /* Hero section styles */
 
 .hero {
-  /* background-image: url('https://images.pexels.com/photos/585418/pexels-photo-585418.jpeg?cs=srgb&dl=pexels-yury-kim-181374-585418.jpg&fm=jpg'); */
-  background-color: whitesmoke;
+  background-image: url('https://media.istockphoto.com/id/1396466280/photo/home-improvement-construction-tools-on-black-background-with-copy-space-banner.jpg?s=612x612&w=0&k=20&c=MPUykaTV-NfspUQHee8fhmOouZrn89wS_2yv_Ih71GU=');
+
   background-size: cover;
   background-position: center;
-  height: 80vh;
-  /* width: 100%; */
+  background-repeat: no-repeat;
+
+  height: 70vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: black;
-  padding: 0 15px; /* Added padding to prevent overflow */
+  padding: 0 15px; 
   box-sizing: border-box;
+
+
+
+  
 }
 .hero h1 {
   font-size: 45px;
   text-align: center;
   margin-bottom: 20px;
   font-weight: bold;
-  color: #1b1e1d; /* Changed color to match the logo */
+  color: wheat; /* Changed color to match the logo */
         
 }
 .hero p {
@@ -146,7 +152,7 @@ header {
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
-  color: #333;
+  color: white;
 }
 .btn {
    margin-left: 0; /*Removed margin-left to prevent overflow */
