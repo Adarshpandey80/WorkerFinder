@@ -3,112 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workerfinder</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <title><%= listing.name %> | Electrician | Worker-Finder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8tH5ZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/showlist.css">
+    <link rel="stylesheet" href="/css/rating.css">
 </head>
-<body>
+<body class="professional-detail">
     <header>
-        <nav class="navbar navbar-expand-lg ">
+        <nav class="navbar">
             <div class="container-fluid">
-              <a class="navbar-logo" href="#">Worker- <span>Finder </span> </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse" id="navbarNavDropdown">
+                <a class="navbar-logo" href="/home">Worker- <span>Finder</span></a>
+                <div class="navbar-links">
                 <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="/home">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
-                  </li>
-                  <% if ( currUser && currUser._id.equals(listing.owner._id)) { %>
-                   <li class="nav-item">
-                    <a class="nav-link" href="/electrician/<%= listing._id %>/editelectrician">Edit your data</a>
-                  </li>
-                  <% } %>
+                  <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
                 </ul>
               </div>
             </div>
-          </nav>
-       </header>
+        </nav>
+    </header>
 
-             <%if(success && success.length) {%>
-   <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert">
-    <%=success%>
-     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-   </div>
-   <% }%>
-
-       <div class="container">
-        <h1> Electrician details</h1>
-        <ul class="list">
-            <div>
-                <img src="<%=listing.image.url%>" alt="Electrician Image" >
-            </div>
-            <div class="details">
-                <li> <span>Name </span> <%=listing.name %></li>
-                <li><span>Location </span>  <%=listing.location %></li>
-                <li><span>Contact </span> <%=listing.contact %></li>
-                <li><span>Charge</span> <%=listing.rate.toLocaleString("en-IN") %></li>
-                <li><span>Country</span> <%=listing.country %></li>
-                <li><span>Experience</span> <%=listing.experience %></li>
-               
-                
-                
-            </div>
-         </ul>
-
-       
-         <% if ( currUser && currUser._id.equals(listing.owner._id)) { %>
-            <div class="form">
-              <form action="/electrician/<%= listing._id %>?_method=DELETE" method="POST">
-                <button type="submit" class="btn btn-danger">Delete your account</button>
-               </form>
-            </div>
-            <% } %>
+    <% if (success && success.length) { %>
+        <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert">
+            <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-          
+    <% } %>
 
-     <div class="col-8 offset-3 mb-5 mt-5" >
-          <h3>Leave a review</h3>
-         <form action="/electrician/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
-              <div class="mb-3 mt-3">
-                     <label for="review" class="form-label">Rating</label>
-                       <input type="range"  name="review[rating]" id="review"  min="1" max="5" class="form-range">
-               </div>
-              <div class="mb-3 mt-3">
-                 <label for="comment" class="form-label">Feedback </label>
-                  <textarea name="review[comment]" id="comment" cols="30" rows="10" class="form-control"  required></textarea>
-              </div>
-             <button class="btn btn-outline-dark">Submit</button>
-           </form>
-      <br><br>
+    <main class="profile-page">
+        <div class="profile-heading">
+            <p class="profile-kicker">Trusted local professional</p>
+            <h1>Electrician profile</h1>
+            <p>Review the details, then contact <strong><%= listing.name %></strong> to arrange your project.</p>
+        </div>
 
-                <h3>All Reviews</h3>
-         <div class="row d-flex flex-wrap">
-               <% for (let review of listing.reviews) { %> 
-               <div class="card mb-3 review-card  " style="max-width: 540px;">
-                  <div class="card-body">
-                     <h5 class="card-tital"> @<%= review.author.username%></h5>
-                     <p class="card-text"><%= review.comment%>  </p>
-                     <p class="card-text"> <%= review.rating%> </p>
-                  </div>
-                   <form method="POST" action="/electrician/<%= listing._id %>/reviews/<%=review._id%>?_method=DELETE"   class="mb-3">
-                        <button class="btn btn-outline-dark">Delete</button>
- 
-                      </form>
-               </div>
-                     <%} %>
-           </div>  
-       </div>
+        <section class="profile-card">
+            <div class="profile-photo-wrap">
+                <img src="<%= listing.image.url %>" alt="<%= listing.name %>, electrician">
+                <span class="profile-status">Available for work</span>
+            </div>
+            <div class="profile-content">
+                <div class="profile-title-row">
+                    <div>
+                        <p class="profile-service">Electrician</p>
+                        <h2><%= listing.name %></h2>
+                    </div>
+                    <div class="profile-rating" aria-label="Trusted professional">&#9733; Trusted</div>
+                </div>
 
-     
+                <div class="profile-facts">
+                    <div><span>Location</span><strong><%= listing.location %>, <%= listing.country %></strong></div>
+                    <div><span>Typical charge</span><strong><%= listing.rate.toLocaleString("en-IN") %></strong></div>
+                    <div><span>Contact</span><strong><%= listing.contact %></strong></div>
+                </div>
 
+                <div class="profile-experience">
+                    <span>About this professional</span>
+                    <p><%= listing.experience %></p>
+                </div>
 
+                <div class="profile-actions">
+                    <a class="book-button" href="tel:<%= listing.contact %>">&#9742; Book this electrician</a>
+                    <a class="secondary-button" href="#reviews">Read reviews</a>
+                </div>
+            </div>
+        </section>
 
+        <% if (currUser && listing.owner && currUser._id.equals(listing.owner._id)) { %>
+            <div class="owner-actions">
+                <span>You manage this listing.</span>
+                <form action="/electrician/<%= listing._id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="delete-button">Delete listing</button>
+                </form>
+            </div>
+        <% } %>
+
+        <section class="review-section" id="reviews">
+            <% if (currUser) { %>
+                <div class="section-heading"><p class="profile-kicker">Community feedback</p><h2>Leave a review</h2></div>
+                <form action="/electrician/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+                    <div class="mb-3 mt-3">
+                        <label for="review" class="form-label">Rating</label>
+                        <fieldset class="starability-slot">
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" /><label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" /><label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" /><label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" /><label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" /><label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="comment" class="form-label">Feedback</label>
+                        <textarea name="review[comment]" id="comment" class="form-control" required></textarea>
+                    </div>
+                    <button class="review-submit">Submit review</button>
+                </form>
+            <% } %>
+
+            <div class="section-heading reviews-heading"><h2>Reviews</h2></div>
+            <div class="reviews-grid">
+                <% for (let review of listing.reviews) { %>
+                    <div class="review-card">
+                        <div class="review-body">
+                            <h5>@<%= review.author.username %></h5>
+                            <p class="starability-result" data-rating="<%= review.rating %>">Rated: <%= review.rating %> stars</p>
+                            <p><%= review.comment %></p>
+                        </div>
+                        <form method="POST" action="/electrician/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                            <button class="review-delete">Delete</button>
+                        </form>
+                    </div>
+                <% } %>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-    
 </body>
 </html>

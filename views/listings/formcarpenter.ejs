@@ -3,37 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workerfinder</title>
+    <title>Register as a Carpenter | Worker-Finder</title>
     <link rel="stylesheet" href="/css/form.css">
   
 </head>
-<body>
-    <form action="/formcarpenter" method="POST" enctype="multipart/form-data">
-        <h2>Register as carpenter</h2>
-       <input type="text"  name="name" placeholder="your Name:" required>
-       
-       <br><br>
-     
-        <input type="number" name="contact"  placeholder="contact:" required >
-       
-         <br><br>
-         <input type="number" name="rate" placeholder="rate:" required>
-         <br><br>
-         <input type="text" name="location" placeholder="location:" required>
-         <br><br>
-         <input type="text" name="country" placeholder="country:" required>
-         <br><br>
-        <textarea name="experience"  placeholder="about experience"></textarea> 
-        <br><br>
-        <label for="image" class="form-control">Uplode your image:</label>
-        <input type="file" name="image" id="image" required >
-         <br><br>
-         <input type="submit" value="submit">
-
+<body class="worker-form-page">
+    <form action="/formcarpenter" method="POST" enctype="multipart/form-data" class="worker-form">
+        <a class="form-brand" href="/home">Worker<span>-Finder</span></a>
+        <header class="form-header">
+            <div class="service-badge">Carpenter registration</div>
+            <h1>Welcome, carpenter.</h1>
+            <p>Tell customers about your craft and make it easier for them to find and trust your work.</p>
+        </header>
+        <div class="form-grid">
+            <div class="form-field">
+                <label for="name">Your name</label>
+                <input type="text" name="name" id="name" placeholder="e.g. Rahul Sharma" required>
+            </div>
+            <div class="form-field">
+                <label for="contact">Contact number</label>
+                <input type="number" name="contact" id="contact" placeholder="Your phone number" required>
+            </div>
+            <div class="form-field">
+                <label for="rate">Service rate</label>
+                <input type="number" name="rate" id="rate" placeholder="Rate per service" required>
+            </div>
+            <div class="form-field">
+                <label for="location">Location</label>
+                <input type="text" name="location" id="location" placeholder="City or area" required>
+            </div>
+            <div class="form-field full-width">
+                <label for="country">Country</label>
+                <input type="text" name="country" id="country" placeholder="Country" required>
+            </div>
+            <div class="form-field full-width">
+                <label for="experience">About your experience</label>
+                <textarea name="experience" id="experience" placeholder="Share a little about your experience and specialties"></textarea>
+            </div>
+            <div class="form-field full-width">
+                <label for="image">Profile image</label>
+                <input type="file" name="image" id="image" required>
+            </div>
+        </div>
+        <input class="form-submit" type="submit" value="Complete registration">
     </form>
-  
-   
-
-    <!-- <script src="/js/script.js"></script>   for form validation-->
 </body>
 </html>

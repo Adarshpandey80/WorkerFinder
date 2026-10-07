@@ -14,8 +14,8 @@ const plumberSchema = new Schema({
           
        } ,
     
-        contact : {
-             type: Number,
+           contact : {
+               type: String,
             required: true,
             unique: true,
            
@@ -27,7 +27,7 @@ const plumberSchema = new Schema({
             },
         rate:
         {
-            type: Number,
+            type: String,
             required: true,
         },
         
