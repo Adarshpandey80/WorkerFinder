@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workerfinder</title>
+    <title>Find Electricians | Worker-Finder</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
     <link rel="stylesheet" href="/css/services.css">
 
 </head>
-<body>
+<body class="service-page">
     <header >
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-              <a class="navbar-logo" href="#">Worker <span>-Finder</span></a>
+              <a class="navbar-logo" href="/home">Worker <span>-Finder</span></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -45,19 +45,34 @@
        </header>
        
        
-       <div style="display: flex; justify-content:space-around;  margin-top: 20px;">
+    <main class="services-page">
+      <section class="service-hero">
+        <div>
+          <p class="eyebrow">Trusted local professionals</p>
+          <h1>Find an electrician for the job.</h1>
+          <p class="hero-copy">Connect with experienced electricians for safe installations, repairs, and upgrades.</p>
+        </div>
+        <div class="service-count"><strong><%= allelectrician.length %></strong><span>electricians available</span></div>
+      </section>
 
-          <form class="d-flex" role="search" method="GET" action="/electrician">
-        <input class="form-control me-2" type="search" name="location" placeholder="Search worker in near" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+      <form class="service-search" role="search" method="GET" action="/electrician">
+        <div class="search-input-wrap">
+          <span class="search-icon" aria-hidden="true">&#9906;</span>
+          <input type="search" name="location" value="<%= searchTerm %>" placeholder="Search by name, location, or country" aria-label="Search electricians" list="electrician-suggestions" autocomplete="off">
+          <datalist id="electrician-suggestions">
+            <% suggestions.forEach((suggestion) => { %>
+              <option value="<%= suggestion %>"></option>
+            <% }) %>
+          </datalist>
+        </div>
+        <button class="search-button" type="submit">Search</button>
+        <% if (searchTerm) { %><a class="clear-search" href="/electrician">Clear</a><% } %>
       </form>
-       </div>
-       <hr>
+      <% if (searchTerm) { %><p class="search-summary">Showing results for <strong><%= searchTerm %></strong></p><% } %>
      
-   
-     <ul class="list-group" >
+     <ul class="list-group service-list" >
         <% for ( let listings of allelectrician) { %>
-            <li class="list-data">
+            <li class="list-data listing-card">
 
                 <div class="image-container" >
                     <img src="<%=listings.image.url%>" alt="Electrician Image">
@@ -73,6 +88,10 @@
             </li>
         <% } %>
      </ul>
+     <% if (!allelectrician.length) { %>
+       <div class="empty-state"><h2>No electricians found</h2><p>Try a different name, location, or country.</p><a href="/electrician">View all electricians</a></div>
+     <% } %>
+    </main>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     
 </body>

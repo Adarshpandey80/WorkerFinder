@@ -58,13 +58,12 @@ app.use((req,res,next)=>{
 })
 
 
-// const MONGO_URL = "mongodb://127.0.0.1:27017/workerfinder";
-const dburl = process.env.ATLUS_URL;
+const MONGO_URL = process.env.MONGO_URL;
 
 async function main() {
   try {
-    await mongoose.connect(dburl, {
-      serverSelectionTimeoutMS: 5000, 
+    await mongoose.connect(MONGO_URL, {
+      serverSelectionTimeoutMS: 5000,
       bufferCommands: false, 
     });
     console.log('Connected to MongoDB');
@@ -176,43 +175,65 @@ async (req,res)=>{
 
 //index page
 
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const getServiceListings = async (Model, search) => {
+  const normalizedSearch = String(search || '').trim();
+  const filter = normalizedSearch
+    ? {
+        $or: [
+          { name: { $regex: escapeRegex(normalizedSearch), $options: 'i' } },
+          { location: { $regex: escapeRegex(normalizedSearch), $options: 'i' } },
+          { country: { $regex: escapeRegex(normalizedSearch), $options: 'i' } },
+        ],
+      }
+    : {};
+
+  const [listings, searchableFields] = await Promise.all([
+    Model.find(filter),
+    Model.find({}, 'name location country').lean(),
+  ]);
+
+  const suggestions = [...new Set(searchableFields.flatMap((listing) => [
+    listing.name,
+    listing.location,
+    listing.country,
+  ]).filter(Boolean))].sort();
+
+  return { listings, suggestions };
+};
+
 app.get("/carpenter" , isLoggedIn,
  
     async (req,res)=>{
- 
-  const location = req.query.location;
-  let allcarpenter;
-  if(location){
-    allcarpenter =  await Carpenter.find({ location: location });
-  } else {
-    allcarpenter =  await  Carpenter.find({});
-  }
-  res.render("listings/carpenter" , { allcarpenter})
+
+  const { listings: allcarpenter, suggestions } = await getServiceListings(Carpenter, req.query.location);
+  res.render("listings/carpenter" , {
+    allcarpenter,
+    suggestions,
+    searchTerm: req.query.location || '',
+  });
 })
 
 
 
 app.get("/electrician" , isLoggedIn,  async (req,res)=>{
-  const location = req.query.location;
-  let allelectrician;
-  if(location){
-    allelectrician =  await Electrician.find({ location: location });
-  } else {
-    allelectrician =  await  Electrician.find({});
-  }
-  res.render("listings/electrician" , { allelectrician})
+  const { listings: allelectrician, suggestions } = await getServiceListings(Electrician, req.query.location);
+  res.render("listings/electrician" , {
+    allelectrician,
+    suggestions,
+    searchTerm: req.query.location || '',
+  });
 
 })
 
 app.get("/plumber" , isLoggedIn,  async (req,res)=>{
-  const location = req.query.location;
-  let allplumber;
-  if(location){
-    allplumber =  await Plumber.find({ location: location });
-  } else {
-    allplumber =  await Plumber.find({});
-  }
-  res.render("listings/plumber" , { allplumber})
+  const { listings: allplumber, suggestions } = await getServiceListings(Plumber, req.query.location);
+  res.render("listings/plumber" , {
+    allplumber,
+    suggestions,
+    searchTerm: req.query.location || '',
+  });
 });
 
 //show page

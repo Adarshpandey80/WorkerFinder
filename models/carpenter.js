@@ -18,7 +18,7 @@ const carpenterSchema = new Schema({
    } ,
 
     contact : {
-        type: Number,
+        type: String,
         required: true,
         unique: true,
 

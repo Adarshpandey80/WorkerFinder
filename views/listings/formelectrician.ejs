@@ -3,30 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workerfinder</title>
+    <title>Register as an Electrician | Worker-Finder</title>
     <link rel="stylesheet" href="/css/form.css">
 </head>
-<body>
-    <form action="/formelectrician" method="POST" >
-        <h3>Register as Electrician</h3>
-       <input type="text"  name="name" placeholder="your Name:" required>
-       <br><br>
-     
-        <input type="number" name="contact"  placeholder="contact:" required>
-         <br><br>
-         <input type="number" name="rate" placeholder="rate:" required>
-         <br><br>
-         <input type="text" name="location" placeholder="location:" required>
-         <br><br>
-         <input type="text" name="country" placeholder="country:" required>
-         <br><br>
-        <textarea name="experience"  placeholder="about experience"></textarea> 
-            <br><br>
-        <input type="file" name="image" id="image" >
-         <br><br>
-         <input type="submit" value="submit">
-
+<body class="worker-form-page">
+    <form action="/formelectrician" method="POST" enctype="multipart/form-data" class="worker-form">
+        <a class="form-brand" href="/home">Worker<span>-Finder</span></a>
+        <header class="form-header">
+            <div class="service-badge">Electrician registration</div>
+            <h1>Welcome, electrician.</h1>
+            <p>Showcase your skills and help nearby customers connect with a professional they can rely on.</p>
+        </header>
+        <div class="form-grid">
+            <div class="form-field">
+                <label for="name">Your name</label>
+                <input type="text" name="name" id="name" placeholder="e.g. Rahul Sharma" required>
+            </div>
+            <div class="form-field">
+                <label for="contact">Contact number</label>
+                <input type="number" name="contact" id="contact" placeholder="Your phone number" required>
+            </div>
+            <div class="form-field">
+                <label for="rate">Service rate</label>
+                <input type="number" name="rate" id="rate" placeholder="Rate per service" required>
+            </div>
+            <div class="form-field">
+                <label for="location">Location</label>
+                <input type="text" name="location" id="location" placeholder="City or area" required>
+            </div>
+            <div class="form-field full-width">
+                <label for="country">Country</label>
+                <input type="text" name="country" id="country" placeholder="Country" required>
+            </div>
+            <div class="form-field full-width">
+                <label for="experience">About your experience</label>
+                <textarea name="experience" id="experience" placeholder="Share a little about your experience and specialties"></textarea>
+            </div>
+            <div class="form-field full-width">
+                <label for="image">Profile image</label>
+                <input type="file" name="image" id="image">
+            </div>
+        </div>
+        <input class="form-submit" type="submit" value="Complete registration">
     </form>
-    
 </body>
 </html>

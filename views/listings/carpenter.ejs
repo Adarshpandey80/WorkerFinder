@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workerfinder</title>
+    <title>Find Carpenters | Worker-Finder</title>
     <link rel="stylesheet" href="/css/services.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
@@ -12,11 +12,11 @@
 
 
 </head >
-<body >
+<body class="service-page">
     <header>
         <nav class="navbar navbar-expand-lg ">
             <div class="container-fluid">
-              <a class="navbar-logo" href="#">Worker <span>-Finder </span></a>
+              <a class="navbar-logo" href="/home">Worker <span>-Finder </span></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -53,18 +53,39 @@
    </div>
    <% } %>
    
-       <div style="display: flex; justify-content:space-around;  margin-top: 20px;">
-       
-          <form class="d-flex" role="search" method="GET" action="/carpenter">
-        <input class="form-control me-2" type="search" name="location" placeholder="Search worker in near " aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-       </div>
-       <hr>
+    <main class="services-page">
+      <section class="service-hero">
+        <div>
+          <p class="eyebrow">Trusted local professionals</p>
+          <h1>Find a carpenter for your next project.</h1>
+          <p class="hero-copy">Browse skilled carpenters near you for repairs, custom work, and home improvements.</p>
+        </div>
+        <div class="service-count"><strong><%= allcarpenter.length %></strong><span>carpenters available</span></div>
+      </section>
 
-     <ul class="list-group" >
+      <form class="service-search" role="search" method="GET" action="/carpenter">
+        <div class="search-input-wrap">
+          <span class="search-icon" aria-hidden="true">&#9906;</span>
+          <input type="search" name="location" value="<%= searchTerm %>" placeholder="Search by name, location, or country" aria-label="Search carpenters" list="carpenter-suggestions" autocomplete="off">
+          <datalist id="carpenter-suggestions">
+            <% suggestions.forEach((suggestion) => { %>
+              <option value="<%= suggestion %>"></option>
+            <% }) %>
+          </datalist>
+        </div>
+        <button class="search-button" type="submit">Search</button>
+        <% if (searchTerm) { %>
+          <a class="clear-search" href="/carpenter">Clear</a>
+        <% } %>
+      </form>
+
+      <% if (searchTerm) { %>
+        <p class="search-summary">Showing results for <strong><%= searchTerm %></strong></p>
+      <% } %>
+
+     <ul class="list-group service-list" >
         <% for ( let listings of allcarpenter) { %>
-            <li class="list-data">
+            <li class="list-data listing-card">
 
                 <div class="image-container">
                     <img src="<%=listings.image.url%>" alt="Carpenter Image" >
@@ -79,6 +100,10 @@
             </li>
         <% } %>
      </ul>
+     <% if (!allcarpenter.length) { %>
+       <div class="empty-state"><h2>No carpenters found</h2><p>Try a different name, location, or country.</p><a href="/carpenter">View all carpenters</a></div>
+     <% } %>
+    </main>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
      
 </body>

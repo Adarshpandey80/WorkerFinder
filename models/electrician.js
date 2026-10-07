@@ -16,8 +16,8 @@ const electricianSchema = new Schema({
       
    } ,
 
-    contact : {
-         type: Number,
+        contact : {
+          type: String,
          required: true,
          unique: true,
        
@@ -28,9 +28,9 @@ const electricianSchema = new Schema({
       
        
         },
-    rate:
-    {
-         type: Number,
+        rate:
+        {
+          type: String,
          required: true,
       
     },
